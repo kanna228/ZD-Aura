@@ -1,3 +1,5 @@
+let cartItems = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.size-buttons').forEach(button => {
         button.addEventListener('click', function() {
@@ -22,7 +24,7 @@ function addToCart() {
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     const product = {
         name: 'Slim fit jeans',
-        price: '49.99$',
+        price: '49.99',
         size: selectedSize
     };
 
@@ -33,8 +35,20 @@ function addToCart() {
     location.reload();
 }
 
-function loadCartItems() {
+function totalcount() {
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalElement = document.getElementById('card-total');
+    totalElement.innerHTML = ""; 
+    let money = 0;
+
+    for (let i = 0; i < cartItems.length; i++) {
+        money += parseFloat(cartItems[i].price);
+    }
+    totalElement.innerHTML = money.toFixed(2) + "$";
+}
+
+function loadCartItems() {
+    cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     const cartList = document.getElementById('cart-items');
     cartList.innerHTML = '';
 
@@ -43,13 +57,15 @@ function loadCartItems() {
     } else {
         cartItems.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = `${item.name} - Size: ${item.size} - Price: ${item.price}`;
+            li.textContent = `${item.name} - Size: ${item.size} - Price: ${item.price}$`;
             cartList.appendChild(li);
         });
     }
+    totalcount();
 }
 
 function clearCart() {
     localStorage.removeItem('cart');
     loadCartItems();
 }
+

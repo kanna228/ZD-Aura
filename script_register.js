@@ -1,45 +1,41 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('multiStepForm');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const formSteps = document.querySelectorAll('.form-step');
+document.addEventListener('DOMContentLoaded', function () {
+    const loginError = document.getElementById('login-error');
+    const mainUsernameDisplay = document.getElementById('user-name-display');
+    const mainWelcomeSection = document.getElementById('welcome-section');
+    const mainLoginForm = document.getElementById('main-login-form');
+    const savedUsername = localStorage.getItem('loggedInUser');
 
-    let currentStep = 0;
-
-    function showStep(stepIndex) {
-        formSteps.forEach((step, index) => {
-            if (index === stepIndex) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
-        });
-
-        prevBtn.disabled = stepIndex === 0;
-        nextBtn.style.display = stepIndex === formSteps.length - 1 ? 'none' : 'inline';
-        submitBtn.style.display = stepIndex === formSteps.length - 1 ? 'inline' : 'none';
+    // Check for existing logged-in user
+    if (savedUsername) {
+        showWelcome(savedUsername);
     }
 
-    nextBtn.addEventListener('click', () => {
-        if (currentStep < formSteps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
+    // Function to handle login
+    window.login = function () {
+        const username = document.getElementById('main-username').value;
+        const password = document.getElementById('main-password').value;
 
-    prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-            currentStep--;
-            showStep(currentStep);
+        // Simple authentication check
+        if (username === 'obodi' && password === '123') {
+            localStorage.setItem('loggedInUser', username);
+            showWelcome(username);
+            loginError.style.display = 'none';
+        } else {
+            loginError.style.display = 'block';
         }
-    });
+    };
 
-    // Handle form submission
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        alert('Form submitted successfully!');
-        console.log(Object.fromEntries(new FormData(form)));
-    });
-    showStep(currentStep);
+    // Function to handle logout
+    window.logout = function () {
+        localStorage.removeItem('loggedInUser');
+        mainWelcomeSection.style.display = 'none';
+        mainLoginForm.style.display = 'flex';
+    };
+
+    // Function to display welcome message
+    function showWelcome(username) {
+        mainWelcomeSection.style.display = 'block';
+        mainUsernameDisplay.textContent = username;
+        mainLoginForm.style.display = 'none';
+    }
 });

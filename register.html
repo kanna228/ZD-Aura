@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZD Aura</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -21,30 +20,29 @@
         <div class="header-container">  
             <header>
                 <nav class="navbar navbar-expand-lg navbar-dark">
-                    <a class=" nav-item logo  navbar-brand logo " href="main_page.html">ZD Aura</a>
+                    <a class="nav-item logo navbar-brand logo" href="main_page.html">ZD Aura</a>
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a style="color: white;" class="nav-link  nav-list .nav-link" href="main_page.html">Main menu</a>
+                                <a style="color: white;" class="nav-link nav-list" href="main_page.html">Main menu</a>
                             </li>
                             <li class="nav-item ">
-                                <a style="color: white;" class="nav-link nav-list .nav-link" href="choosing.html">Shop</a>
+                                <a style="color: white;" class="nav-link nav-list" href="choosing.html">Shop</a>
                             </li>
                             <li class="nav-item ">
-                                <a style="color: white;" class="nav-link nav-list .nav-link" href="faq.html">About us</a>
+                                <a style="color: white;" class="nav-link nav-list" href="faq.html">About us</a>
                             </li>
                             <li class="nav-item ">
-                                <a style="color: white;" class="nav-link nav-list .nav-link" href="register.html">Contacts</a>
+                                <a style="color: white;" class="nav-link nav-list" href="register.html">Contacts</a>
                             </li>
                             <li class="nav-item">
-                                <a style="color: white;" class="nav-link nav-list .nav-link" href="register.html">Blog</a>
+                                <a style="color: white;" class="nav-link nav-list" href="register.html">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a style="color: white;" class="nav-link nav-list .nav-link" href="register.html">Help</a>
+                                <a style="color: white;" class="nav-link nav-list" href="register.html">Help</a>
                             </li>
                             <li class="nav-item-button"></li>
                             <button id="theme-toggle-btn" class="btn btn-outline-light my-2">Switch Theme</button>
-                            </li>
                             <li class="nav-item-button"></li>
                             <button id="playMusic" class="btn btn-outline-light my-2">Play Music</button>
                             </li>
@@ -60,41 +58,19 @@
         </div>
 
         <main class="container-register">
-            <ul class = "items-list">
-            <h2 style="display: flex; justify-content: center; margin-bottom: 10%;">Registration form</h2>
-            <form id="multiStepForm">
-                <div class="form-step active">
-                    <h3>Step 1: Enter your Personal Information</h3>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+            <section id="login-section">
+                <div id="main-login-form" style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 50px;">
+                    <h2>Login</h2>
+                    <input type="text" id="main-username" placeholder="Username" required class="form-control" style="width: 200px; margin-bottom: 10px;">
+                    <input type="password" id="main-password" placeholder="Password" required class="form-control" style="width: 200px; margin-bottom: 10px;">
+                    <button onclick="login()" class="btn btn-primary">Login</button>
+                    <p id="login-error" style="color: red; display: none;">Invalid username or password.</p>
                 </div>
-        
-                <div class="form-step">
-                    <h3>Step 2: Enter your Address</h3>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" required>
-                    <label for="city">City:</label>
-                    <input type="text" id="city" name="city" required>
+                <div id="welcome-section" style="display: none; text-align: center; margin-top: 20px;">
+                    <h2>Welcome, <span id="user-name-display"></span>!</h2>
+                    <button onclick="logout()" class="btn btn-secondary">Logout</button>
                 </div>
-        
-                <div class="form-step">
-                    <h3>Step 3: Enter your Payment Information</h3>
-                    <label for="creditCard">Credit Card:</label>
-                    <input type="text" id="creditCard" name="creditCard" required>
-                    <label for="expiry">Expiry Date:</label>
-                    <input type="text" id="expiry" name="expiry" required>
-                </div>
-        
-                <div class="form-navigation">
-                    <button type="button" id="prevBtn" class="btn btn-secondary" disabled>Back</button>
-                    <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
-                </div>
-        
-                <button type="submit" id="submitBtn" class="btn btn-success" style="display: none;">Submit</button>
-            </ul>
-            </form>
+            </section>
         </main>
 
         <!-- Footer -->
@@ -107,7 +83,7 @@
                     <li class="footer-item"><a href="https://web.telegram.org/k/#@mirsjex" class="text-white">Telegram</a></li>
                 </ul>
             </nav>
-            <div style="margin-top:4% ;" id="date-time"></div>
+            <div style="margin-top:4%;" id="date-time"></div>
             <p class="footer-credits text-right pr-3">Abdimanap Dias<br>Turgimbayev Amirkhan<br>Zhetpissov Zhandarbek</p>
         </footer>
     </div>
@@ -121,5 +97,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Link to external JavaScript file -->
+    <script src="auth.js"></script>
 </body>
 </html>
